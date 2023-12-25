@@ -1,0 +1,15 @@
+{
+	"name": "discord-webrtc",
+	"version": "1.0.0",
+	"description": "-   Show list repository: az acr repository list --name discord --output table -   Show list tags: az acr repository show-tags --name discord --repository discord-client --output table",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"prettier": "^3.1.1"
+	}
+}

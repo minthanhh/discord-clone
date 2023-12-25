@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {inviteValidator} from './validators/invite.validator.js'
+import {inviteValidator} from './validators'
 import {invite, accept, reject} from './controllers'
 
 const router = Router()
