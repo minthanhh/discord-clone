@@ -1,0 +1,21 @@
+services:
+    discord-server:
+        container_name: discord-server
+        build:
+            context: ./server
+            target: development
+        command: npm start
+        ports:
+            - 3000:3000
+        volumes:
+            - ./server:/usr/src/app
+    discord-client:
+        container_name: discord-client
+        build:
+            context: ./client
+            target: development
+        command: npm start
+        depends_on:
+            - discord-server
+        ports:
+            - 3001:3000

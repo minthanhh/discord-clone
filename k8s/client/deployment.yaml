@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: discord-client-deployment
+    labels:
+        app: discord-server
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: discord-server
+    template:
+        metadata:
+            labels:
+                app: discord-server
+        spec:
+            containers:
+                - name: discord-server
+                  image: hoominth/discord-server:v0.0.1
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                      - containerPort: 80

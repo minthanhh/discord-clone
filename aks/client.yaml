@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: discord-client-deployment
+    labels:
+        app: discord-client
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: discord-client
+    template:
+        metadata:
+            labels:
+                app: discord-client
+        spec:
+            containers:
+                - name: discord-client
+                  image: discord.azurecr.io/discord-client:v0.0.1
+                  imagePullPolicy: IfNotPresent
+                  imagePullSecrets:
+                      - name: discord-acr
+                  ports:
+                      - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: discord-client-service
+spec:
+    type: LoadBalancer
+    selector:
+        app: discord-client
+    ports:
+        - protocol: TCP
+          port: 3000
+          targetPort: 3001

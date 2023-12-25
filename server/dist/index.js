@@ -1,0 +1,20 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+require("dotenv/config");
+var _mongoose = _interopRequireDefault(require("mongoose"));
+var _express = _interopRequireDefault(require("express"));
+var _http = require("http");
+var _constants = require("./core/constants");
+var _routes = _interopRequireDefault(require("./apis/routes"));
+var _cors = _interopRequireDefault(require("cors"));
+var _socket = require("./shared/services/socket");
+const PORT = 3001;
+const app = (0, _express.default)();
+const http = (0, _http.createServer)(app);
+_socket.SocketService.initializer(http);
+app.use(_express.default.json());
+app.use((0, _cors.default)());
+app.use('/api/v1', _routes.default);
+_mongoose.default.connect(_constants.Env.MONGODB_URL).then(() => console.log('Connected')).catch(console.error);
+http.listen(PORT, () => console.log(`App listening on uri http://localhost:${PORT}`));
